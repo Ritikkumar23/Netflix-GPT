@@ -4,7 +4,7 @@ import VideoTitle from './VideoTitle'
 import VideoBackground from './VideoBackground'
 
 const MainContainer = () => {
-    const movies = useSelector(store => store?.movies?.nowPlayingMovies);
+    const movies = useSelector(store => store.movies?.nowPlayingMovies);
 
     if (!movies || movies.length === 0) return <p>No movies available</p>;  //this is known as early return
 
@@ -12,11 +12,11 @@ const MainContainer = () => {
 
     const { original_title, overview, id } = mainMovie;
     return (
-        <div className=' '>
+        <div className="">
             <VideoTitle title={original_title} overview={overview} />
             <VideoBackground movieId={id} />
         </div>
     )
 }
 
-export default MainContainer;
+export default MainContainer
