@@ -48,22 +48,22 @@ const Header = () => {
     const handleLanguageChange = (e) => {
         dispatch(changeLanguage(e.target.value));
     }
-    const showGptSearch=useSelector((store)=>store.gpt.showGptSearch);
+    const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
     return (
-        <div className=' px-8 py-2 w-screen bg-gradient-to-b from-black absolute z-10 justify-between flex'>
-            <img className='w-44' src={LOGO}
+        <div className=' px-8 py-2 w-screen bg-gradient-to-b from-black absolute z-10 justify-between flex flex-col md:flex-row '>
+            <img className='w-44 mx-auto md:mx-0' src={LOGO}
                 alt="logo" />
 
 
             {user &&
-                <div className='flex p-2 align-middle'>
+                <div className='flex p-2 align-middle items-center'>
 
-                   {showGptSearch&& <select onClick={handleLanguageChange} className='p-2 m-2 bg-gray-900 text-white'>
+                    {showGptSearch && <select onClick={handleLanguageChange} className='p-2 m-2 bg-gray-900 text-white'>
                         {SUPPORTED_LANGUAGES.map((lang) => (<option key={lang.identifier} value={lang.identifier} >{lang.name}</option>))}
                     </select>
-}
-                    <button onClick={handleGptSearchClick} className=' px-4 py-2 mx-4 my-2 bg-purple-800 text-white rounded-lg' >
-                       { showGptSearch?"Home Page":"GPT Search"}
+                    }
+                    <button onClick={handleGptSearchClick} className=' px-4  py-2 mx-4 my-2 bg-purple-800 text-white rounded-lg' >
+                        {showGptSearch ? "Home Page" : "GPT Search"}
                     </button>
 
                     <img className='w-12 h-12' alt='userlogo' src={user?.photoURL} />

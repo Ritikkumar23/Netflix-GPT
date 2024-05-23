@@ -31,7 +31,7 @@ const Login = () => {
                 .then((userCredential) => {
                     // Signed up 
                     const user = userCredential.user;
-                    
+
                     updateProfile(user, {
                         displayName: name.current.value,
                         photoURL: USER_AVATAR,
@@ -86,11 +86,12 @@ const Login = () => {
     return (
         <div>
             <Header />
-            <div className='absolute'>
-                <img src={BG_URL}
+            <div className='absolute inset-0'>
+                <img className='w-full h-screen object-cover' src={BG_URL}
                     alt="logo" />
             </div>
-            <form onSubmit={(e) => e.preventDefault()} className='absolute my-36 p-12 bg-black  w-3/12 mx-auto left-0 right-0 text-white rounded-lg bg-opacity-85'>
+            <form onSubmit={(e) => e.preventDefault()}
+                className='absolute my-36 p-12 bg-black w-full  md:w-3/12 mx-auto left-0 right-0 text-white rounded-lg bg-opacity-85'>
                 <h1 className='text-3xl font-bold py-4'>{isSignInForm ? "Sign In" : "Sign Up"}</h1>
 
                 {!isSignInForm && <input ref={name} type="text" placeholder='Full Name' className='p-4 my-2 w-full text-white bg-gray-700' />}
