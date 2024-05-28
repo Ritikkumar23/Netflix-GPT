@@ -1,25 +1,29 @@
 import { useDispatch, useSelector } from "react-redux";
 import { API_OPTIONS } from "../utils/constants";
 import { addNowPlayingMovies } from "../utils/moviesSlice";
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 
 const useNowPlayingMovies = () => {
     const dispatch = useDispatch();
-    const nowPlayingMovies = useSelector((store) => store.movies.nowPlayingMovies)
-    const getNowPlayingMovies = async () => {
-        const data = await fetch('https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1',
-            API_OPTIONS
-        );
-        const json = await data.json();
+    const nowPlayingMovies = useSelector((store) => store.movies.nowPlayingMovies);
 
-
-        dispatch(addNowPlayingMovies(json.results));
-    };
     useEffect(() => {
+        const getNowPlayingMovies = async () => {
+            try {
+                const data = await fetch('https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1', API_OPTIONS);
+                const json = await data.json();
+                dispatch(addNowPlayingMovies(json.results));
+            } catch (error) {
+                console.error("Error fetching now playing movies:", error);
+            }
+        };
+
         if (!nowPlayingMovies) {
             getNowPlayingMovies();
         }
     }, [nowPlayingMovies, dispatch]);
+
     return nowPlayingMovies;
-}
+};
+
 export default useNowPlayingMovies;

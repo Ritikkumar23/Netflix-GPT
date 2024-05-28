@@ -59,7 +59,7 @@ const Login = () => {
             signInWithEmailAndPassword(auth, email.current.value, Password.current.value)
                 .then((userCredential) => {
                     // Signed in 
-                    const user = userCredential.user;
+                    userCredential = userCredential.user;
 
 
 
